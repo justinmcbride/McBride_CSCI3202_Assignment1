@@ -1,3 +1,6 @@
+''' BinaryTreeNode
+Structure is specified in assignment
+'''
 class BinaryTreeNode:
   def __init__(self, val, parent):
     self.key = val
@@ -9,6 +12,11 @@ class BinaryTree:
   def __init__(self, root):
     self.root = BinaryTreeNode(root, None)
 
+  ''' find(value, node)
+  Helper function to find a specfic node in the BinaryTree
+  Recursively call down each branch because the tree is 
+  not sorted. Returns None if the value can't be found
+  '''
   def find(self, value, node=None):
     if node is None:
       node = self.root
@@ -25,10 +33,15 @@ class BinaryTree:
           return r  
     return None # the search will fall through here
 
+  ''' add(value, parentValue)
+  Add value to the tree only if parentValue exists,
+  and its two children aren't taken.
+  Add to left child if not taken, otherwise add to right.
+
+  '''
   def add(self, value, parentValue):
-    # Some initial error checking
-    if self.root is None:
-      return False
+    # First need to find the parentValue node
+    # and see if it's a viable candidate to adds
     node = self.find(parentValue)
     if node is None:
       print("Parent not found")
@@ -46,6 +59,12 @@ class BinaryTree:
       # Condition two of add
       node.childRight = BinaryTreeNode(value, node)
       return True
+
+  ''' delete(value)
+  Searches for the value to delete, and if it exists
+  and has no children, then remove it, also removing it
+  from its parent
+  '''
   def delete(self, value):
     node = self.find(value)
     if node is None:
@@ -71,9 +90,8 @@ class BinaryTree:
   in the assignment because print is a 
   reserved keyword
 
-  -Implemented this with an optional 'string' parameter
-  to append it all to an output string, mostly
-  for my unit tests
+  -Implemented this to return the output as a string,
+  so that I can unittest it
 
   -Added optional 'node' parameter, to both make
   it recursive but also has the side effect of
