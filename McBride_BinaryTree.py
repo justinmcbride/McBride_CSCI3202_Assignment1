@@ -97,16 +97,17 @@ class BinaryTree:
   it recursive but also has the side effect of
   allowing to print from any single node
   '''
-  def doPrint(self, node = None):
+  def doPrint(self, node = None, top = True):
     s = ""
     if node is None:
       node = self.root
 
-    s += str(node.key)
-    print(node.key)
+    s += str(node.key) + ","
 
     if node.childLeft is not None:
-      s += self.doPrint(node.childLeft)
+      s += self.doPrint(node.childLeft, top=False)
     if node.childRight is not None:
-      s += self.doPrint(node.childRight)
+      s += self.doPrint(node.childRight, top=False)
+    if top:
+      print(s)
     return s

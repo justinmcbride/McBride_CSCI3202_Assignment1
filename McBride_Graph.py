@@ -33,7 +33,7 @@ class Graph:
       print("One or more vertices not found.")
       return False
     self.values[value1].append(value2)
-    if self.directed:
+    if not self.directed:
       self.values[value2].append(value1)
     return True
 
